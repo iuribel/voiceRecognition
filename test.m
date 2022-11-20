@@ -23,6 +23,7 @@ for k=1:n                       % read test sound file of each speaker
     k1 = 0;
    
     for l = 1:length(code)      % each trained codebook, compute distortion
+        
         d = distance(v, code{l}); 
         dist = sum(min(d,[],2)) / size(d,1);
       

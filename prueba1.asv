@@ -1,0 +1,4 @@
+%code1=train2('C:\Users\NATHA\Documents\Semestre 2022-2\Teoria de la inormación\Speech-Recognition\data2\train\');
+%names1=savenames('C:\Users\NATHA\Documents\Semestre 2022-2\Teoria de la inormación\Speech-Recognition\data2\train\');
+%names2=savenames('C:\Users\NATHA\Documents\Semestre 2022-2\Teoria de la inormación\Speech-Recognition\data2\test\');
+test2('C:\Users\NATHA\Documents\Semestre 2022-2\Teoria de la inormación\Speech-Recognition\data2\test\',code1,names1, names2)

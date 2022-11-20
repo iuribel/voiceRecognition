@@ -21,7 +21,7 @@ for i=1:n                       % train a VQ codebook for each speaker
     [s, fs] = audioread(file);
     
     v = mfcc(s, fs);            % Compute MFCC's
-    %disp(v)
+    disp(v)
     code{i} = vqCodeBook(v, k);      % Train VQ codebook
-    disp(vqCodeBook(v, k));
+    %disp(vqCodeBook(v, k));
 end

@@ -1,4 +1,4 @@
-function code = train(traindir, n)
+function code = train2(traindir)
 % Speaker Recognition: Training Stage
 %
 % Input:
@@ -14,14 +14,31 @@ function code = train(traindir, n)
 
 k = 16;                         % number of centroids required
 
-for i=1:n                       % train a VQ codebook for each speaker
-    file = sprintf('%ss%d.wav', traindir, i);           
-    disp(file);
-   
-    [s, fs] = audioread(file);
-    
-    v = mfcc(s, fs);            % Compute MFCC's
-    %disp(v)
-    code{i} = vqCodeBook(v, k);      % Train VQ codebook
-    disp(vqCodeBook(v, k));
+path=traindir; %'C:\'; % ruta si es la actual  poner path=pwd
+ext='.wav'; % extension si no se desea filtrar por extension poner ext=''
+ 
+ar=ls(path);
+for j=1:size(ar,1)
+    cn=ar(j,:);
+    [~,~,ex]=fileparts(cn);
+ 
+    if (and(~isfolder(fullfile(path,cn)),or(strcmpi(strtrim(ex),ext),isempty(ext))))
+        disp(fullfile(path,cn))
+
+        if(j>2)
+ 
+            filename = fullfile(path,cn);
+            
+            
+       
+            [s, fs] = audioread(filename);
+            
+            v = mfcc(s, fs);            % Compute MFCC's
+           
+            
+           
+            code{j-2} = vqCodeBook(v, k);      % Train VQ codebook
+            
+        end
+    end
 end

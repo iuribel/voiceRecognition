@@ -8,6 +8,7 @@ function c = mfcc(s, fs)
 % Outputs:
 %       c       : MFCC output, each column contains the MFCC's for one speech frame
 
+%Frame Blocking
 N = 256;                        % frame size
 M = 100;                        % inter frame distance
 len = length(s);
@@ -22,11 +23,17 @@ for i=1:numberOfFrames
     end
 end
 
+%Windowing
 hamW = hamming(N);              % hamming window
 afterWinMat = diag(hamW)*mat;   
+
+%Fast Fourier Transform (FFT)
 freqDomMat = fft(afterWinMat);  % FFT into freq domain
 
+%Mel-frequency Wrapping
 filterBankMat = melFilterBank(20, N, fs);                % matrix for a mel-spaced filterbank
+
+%Cepstrum
 nby2 = 1 + floor(N/2);
 ms = filterBankMat*abs(freqDomMat(1:nby2,:)).^2; % mel spectrum
 c = dct(log(ms));                                % mel-frequency cepstrum coefficients

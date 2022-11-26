@@ -1,19 +1,10 @@
 function c = mfcc(s, fs)
-% MFCC Calculate the mel frequencey cepstrum coefficients (MFCC) of a signal
-%
-% Inputs:
-%       s       : speech signal
-%       fs      : sample rate in Hz
-%
-% Outputs:
-%       c       : MFCC output, each column contains the MFCC's for one speech frame
 
 %Frame Blocking
-N = 256;                        % frame size
-M = 100;                        % inter frame distance
-len = length(s);
-numberOfFrames = 1 + floor((len - N)/double(M));
-mat = zeros(N, numberOfFrames); % vector of frame vectors
+N = 256;                        % Tamaño del cuadro de muestras
+M = 100;                        % Distancia entre cuadros de muestras
+numberOfFrames = floor((length(s) - N)/double(M)) + 1;
+mat = zeros(N, numberOfFrames); % Matriz con los cuadros como columnas
 
 for i=1:numberOfFrames
     index = 100*(i-1) + 1;
@@ -24,16 +15,20 @@ for i=1:numberOfFrames
 end
 
 %Windowing
-hamW = hamming(N);              % hamming window
-afterWinMat = diag(hamW)*mat;   
+hamming_window=hamming(N); %Construcción de la ventana Hamming
+afterWinMat = diag(hamming_window)*mat; %Aplicación de la ventana Hamming a nuestra señal.
 
 %Fast Fourier Transform (FFT)
-freqDomMat = fft(afterWinMat);  % FFT into freq domain
+freqDomMat = fft(afterWinMat); 
+%Este paso puede que sea innecesario
+R = real(freqDomMat).^2;
+I = imag(freqDomMat).^2;
+freqDomMat = R+I;
 
 %Mel-frequency Wrapping
-filterBankMat = melFilterBank(20, N, fs);                % matrix for a mel-spaced filterbank
+filterBankMat = melFilterBank(20, N, fs); 
 
-%Cepstrum
+%Cepstrum-Cosine Transform (DCT).
 nby2 = 1 + floor(N/2);
 ms = filterBankMat*abs(freqDomMat(1:nby2,:)).^2; % mel spectrum
 c = dct(log(ms));                                % mel-frequency cepstrum coefficients

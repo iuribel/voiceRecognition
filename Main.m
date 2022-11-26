@@ -1,4 +1,5 @@
-code=train('C:\Users\Daniel\Desktop\voiceRecognition\data2\train');
-names1=savenames('C:\Users\Daniel\Desktop\voiceRecognition\data2\train\');
-names2=savenames('C:\Users\Daniel\Desktop\voiceRecognition\data2\test\');
-test('C:\Users\Daniel\Desktop\voiceRecognition\data2\test',code,names1, names2);
+clear all;
+code=train('C:\Users\Daniel\Desktop\voiceRecognition\data\train');
+names1=savenames('C:\Users\Daniel\Desktop\voiceRecognition\data\train\');
+names2=savenames('C:\Users\Daniel\Desktop\voiceRecognition\data\test\');
+test('C:\Users\Daniel\Desktop\voiceRecognition\data\test',code,names1, names2);

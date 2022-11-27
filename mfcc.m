@@ -1,5 +1,7 @@
 function c = mfcc(s, fs)
 
+%[s, fs] = audioread("Daniel4.wav");
+
 %Frame Blocking
 N = 256;                        % Tamaño del cuadro de muestras
 M = 100;                        % Distancia entre cuadros de muestras

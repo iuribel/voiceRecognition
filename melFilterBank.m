@@ -8,6 +8,10 @@ function m = melFilterBank(p, n, fs)
 % Outputs:      x   a (sparse) matrix containing the filterbank amplitudes
 %                   size(x) = [p, 1+floor(n/2)]
 
+p=20;
+n=256;
+fs=48000;
+
 f0 = 700 / fs;
 fn2 = floor(n/2);
 

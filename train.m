@@ -1,44 +1,38 @@
-function code = train2(traindir)
-% Speaker Recognition: Training Stage
-%
+% Proceso de entrenamiento del modelo con distintas muestras
 % Input:
-%       traindir : string name/path of directory contains all train sound files
-%       n        : number of train files in traindir
-%
+%       traindir : Ruta del directorio que contiene los audios de
+%       entrenamiento
 % Output:
-%       code     : trained VQ codebooks, code{i} for i-th speaker
-%
-% Note:
-%       Sound files in traindir is supposed to be: 
-%                       s1.wav, s2.wav, ..., sn.wav
+%       code     : Objeto VQ Codebook con los valores derivados del
+%       entrenamiento del modelo, code{i} para el i-esimo hablante.
+% Nota: Los audios se encuentran en formato .wav
 
-k = 16;                         % number of centroids required
+function code = train(traindir)
 
-path=traindir; %'C:\'; % ruta si es la actual  poner path=pwd
-ext='.wav'; % extension si no se desea filtrar por extension poner ext=''
- 
-ar=ls(path);
+%traindir='C:\Users\Daniel\Desktop\voiceRecognition\data\train';
+
+%Número de centroides con los que trabajaremos.
+k = 16;
+%Ruta
+path=traindir; %Ruta
+%Lista de los audios de la ruta
+ar=ls(path); 
+
+%Proceso de entrenamiento del modelo
+%Recorremos la lista con los nombres de los audios.
 for j=1:size(ar,1)
+    %cn='Lorena5.wav';
+    %cn es la variable que contendrá el nombre del audio en cada iteración
     cn=ar(j,:);
-    [~,~,ex]=fileparts(cn);
- 
-    if (and(~isfolder(fullfile(path,cn)),or(strcmpi(strtrim(ex),ext),isempty(ext))))
-        disp(fullfile(path,cn))
-
-        if(j>2)
- 
-            filename = fullfile(path,cn);
+    %Si la ruta no es de una subcarpeta
+    if (~isfolder(fullfile(path,cn)))
+        
+        filename = fullfile(path,cn);
+        [s, fs] = audioread(filename);   
+        %Calculo de MFCC para cada una de las muestras
+        v = mfcc(s, fs);
+        %Entrenamiento del VQ Codebook
+        code{j-2} = vqCodeBook(v, k);
             
-            
-       
-            [s, fs] = audioread(filename);
-            
-            v = mfcc(s, fs);            % Compute MFCC's
-           
-            
-           
-            code{j-2} = vqCodeBook(v, k);      % Train VQ codebook
-            
-        end
     end
 end

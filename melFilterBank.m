@@ -6,9 +6,9 @@ function m = melFilterBank(p, n, fs)
 % Outputs: 
 %         m Matriz que contiene las amplitudes del banco de filtro
 
-p=20;
-n=256;
-fs=48000;
+%p=20;
+%n=256;
+%fs=48000;
 
 f0 = 700 / fs;
 fn2 = floor(n/2);

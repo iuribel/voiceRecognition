@@ -1,12 +1,10 @@
 function m = melFilterBank(p, n, fs)
-% Determine matrix for a mel-spaced filterbank
-%
-% Inputs:       p   number of filters in filterbank
-%               n   length of fft
-%               fs  sample rate in Hz
-%
-% Outputs:      x   a (sparse) matrix containing the filterbank amplitudes
-%                   size(x) = [p, 1+floor(n/2)]
+% Determinar la matriz para un banco de filtros espaciados
+% Inputs: p   Número de filtros en el banco de filtros
+%         n   Longitud de cada frame del proceso mfcc
+%         fs  Frecuencia de muestreo
+% Outputs: 
+%         m Matriz que contiene las amplitudes del banco de filtro
 
 p=20;
 n=256;

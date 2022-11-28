@@ -1,17 +1,23 @@
 function codebk = vqCodeBook(d, k)
-% VQLBG Vector quantization using the Linde-Buzo-Gray algorithm
-%
+% Cuantificación vectorial VQLBG mediante el algoritmo Linde-Buzo-Gray
 % Inputs:
-%       d contains training data vectors (one per column)
-%       k is number of centroids required
-%
+%       d: Contiene los vectores de datos del entrenamiento (Uno por
+%       columna)
+%       k: Número de centroides requeridos
 % Outputs:
-%       c contains the result VQ codebook (k columns, one for each centroids)
+%       codebk: Contiene el conjunto de los CodeBooks entrenados, el cual 
+%               posee k columnas, una por cada centroide.
 
-e = 0.0001;                                 % splitting parameter
-codebk = mean(d, 2);                        % code book
-distortion = int32(inf);             
-numOfCentroids = int32(log2(k));            % number of code words/centroids
+d=c;
+k=16
+
+%Parámetro de división
+e = 0.0001;
+%Sacamos la media de cada fila del conjunto de vectores de entrenamiento
+codebk = mean(d, 2);
+distortion = int32(inf);     
+%Número de palabras clave o centroides
+numOfCentroids = int32(log2(k));
 
 for i=1:numOfCentroids
     codebk = [codebk*(1+e), codebk*(1-e)];  % the splitting

@@ -1,12 +1,11 @@
 function d = distance(x, y)
-% DISTEU Pairwise Euclidean distances between columns of two matrices
-%
+% Distancias euclidianas por pares entre columnas de dos matrices
 % Input:
-%       x, y:   Two matrices whose each column is an a vector data.
-%
+%       x, y:   Dos matrices cuyas columnas corresponden a un vector de
+%       datos
 % Output:
-%       d:      Element d(i,j) will be the Euclidean distance between two
-%               column vectors X(:,i) and Y(:,j)
+%       d:     Conjunto de distancia entre las columnas de las dos
+%       matrices.
 %
 % Note:
 %       The Euclidean distance D between two vectors X and Y is:

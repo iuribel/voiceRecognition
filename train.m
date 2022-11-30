@@ -9,12 +9,12 @@
 
 function code = train(traindir)
 
-traindir='C:\Users\Daniel\Desktop\voiceRecognition\data\train';
+%traindir='C:\Users\Daniel\Desktop\voiceRecognition\data\train';
 
 %Número de centroides con los que trabajaremos.
 k = 16;
 %Ruta
-path=traindir; %Ruta
+path=traindir;
 %Lista de los audios de la ruta
 ar=ls(path); 
 

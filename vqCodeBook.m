@@ -8,9 +8,6 @@ function codebk = vqCodeBook(d, k)
 %       codebk: Contiene el conjunto de los CodeBooks entrenados, el cual 
 %               posee k columnas, una por cada centroide.
 
-d=c;
-k=16;
-
 %Parámetro de división
 e = 0.0001;
 %Sacamos la media de cada fila del conjunto de vectores de entrenamiento

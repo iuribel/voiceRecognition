@@ -1,4 +1,0 @@
-Pruebas: 38
-Errores: 5
-Tasa de error: 13%
-Audios que presentaron errores: w2,s3,w3,w4,w5

@@ -1,4 +1,4 @@
-function test2(testdir,code1,names1, names2)
+function test(testdir,code1,names1, names2)
 % Proceso de testeo del modelo entrenado
 % Input:
 %       testdir : Ruta del directorio que posee los audios de prueba

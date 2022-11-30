@@ -1,0 +1,6 @@
+function result = Prueba_en_vivo(r,code1,names1)
+y = getaudiodata(r);
+Fs = 44100;
+audiowrite('C:\Users\Daniel\Desktop\voiceRecognition\En_vivo\prueba.wav',y,Fs);
+
+test('C:\Users\Daniel\Desktop\voiceRecognition\data\test',code,names1, names2);

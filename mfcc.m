@@ -10,7 +10,7 @@ function c = mfcc(s, fs)
 %       dividida.
 
 %subplot(3,1,1)
-%[s, fs] = audioread("Daniel6.wav");
+[s, fs] = audioread("Daniel6.wav");
 %time=size(s,1)/fs;
 %t=0:1/fs:time;
 %plot(t(2:end),s);

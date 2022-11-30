@@ -9,32 +9,40 @@ function codebk = vqCodeBook(d, k)
 %               posee k columnas, una por cada centroide.
 
 d=c;
-k=16
+k=16;
 
 %Parámetro de división
 e = 0.0001;
 %Sacamos la media de cada fila del conjunto de vectores de entrenamiento
 codebk = mean(d, 2);
 distortion = int32(inf);     
-%Número de palabras clave o centroides
-numOfCentroids = int32(log2(k));
+%Número de loops necesarios para tener esa cantidad de centroides
+loops_for_centroids = int32(log2(k));
 
-for i=1:numOfCentroids
-    codebk = [codebk*(1+e), codebk*(1-e)];  % the splitting
+for i=1:loops_for_centroids
+    % Separación del codebk anterior usando e
+    codebk = [codebk*(1+e), codebk*(1-e)];
     while(1==1)
-        dis = distance(d, codebk);            % distance of each point to every code word
-        [m,ind] = min(dis, [], 2);          % ind maps points in 'd' to closest centroid
+        % Distancia de cada punto a cada palabra clave
+        dis = distance(d, codebk);
+        % Devuelve el valor mínimo de cada fila de dis, junto con
+        % su respectivo índice.
+        [m,ind] = min(dis, [], 2);
+        % ind asigna puntos en 'd' al centroide más cercano
         t = 0;
         lim = 2^i;
         for j=1:lim
-            codebk(:, j) = mean(d(:, ind==j), 2);    % updating centroids to better mean values
-            x = distance(d(:, ind==j), codebk(:, j));  % x is a cluster i.e vector of neighbouring ...
-            len = length(x);                         % ... points of a centroid
+            % actualizar los centroides a mejores valores medios
+            codebk(:, j) = mean(d(:, ind==j), 2);
+            % x es un grupo, es decir, vector de puntos vecinos de un centroide
+            x = distance(d(:, ind==j), codebk(:, j));
+            len = length(x);
             for q = 1:len
                 t = t + x(q);
             end
         end
-        if (((distortion - t)/t) < e)       % distortion condition breaks the loop
+        % distortion condition breaks the loop
+        if (((distortion - t)/t) < e)
             break;
         else
             distortion = t;
